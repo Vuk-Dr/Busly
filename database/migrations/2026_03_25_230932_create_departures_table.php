@@ -17,6 +17,8 @@ return new class extends Migration
             $table->time('time');
             $table->boolean('one_time');
             $table->date('date')->nullable();
+            $table->boolean('active');
+            $table->softDeletes();
             $table->timestamps();
 
             $table->index(['route_id', 'date']);

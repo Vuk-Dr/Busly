@@ -1,14 +1,15 @@
 @extends('adminlte::page')
-@section('title', 'Routes')
+@section('title', 'Departures')
 
 @section('content_header')
     <div class="d-flex justify-content-between align-items-center my-4">
-        <h1>Routes</h1>
-        <a href="{{ route('admin.routes.create') }}" class="btn btn-primary">
-            <i class="fas fa-plus"></i> &nbsp Add Route
+        <h1>Departures</h1>
+        <a href="{{ route('admin.departures.create') }}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> &nbsp Add Departure
         </a>
     </div>
 @endsection
+
 @section('content')
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -18,41 +19,37 @@
     @endif
     <div class="card">
         <div class="card-body p-0 p-sm-4">
-            <table class="table table-responsive-lg table-bordered table-striped">
+            <table class="table table-responsive-xl table-bordered table-striped">
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>Name</th>
-                    <th>Carrier</th>
-                    <th>Seats</th>
-                    <th>Stops</th>
-                    <th>Total price</th>
-                    <th>Duration</th>
+                    <th>Route</th>
+                    <th>Time</th>
+                    <th>Date</th>
+                    <th>Status</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                @forelse($routes as $r)
+                @forelse($departures as $d)
                     <tr>
-                        <td class="align-middle">{{ $r->id }}</td>
-                        <td class="align-middle">{{ $r->getName() }}</td>
-                        <td class="align-middle">{{ $r->carrier->name }}</td>
-                        <td class="align-middle">{{ $r->seats }}</td>
-                        <td class="align-middle">{{ $r->routeStops->count() }}</td>
-                        <td class="align-middle">{{ $r->totalPrice() }}</td>
-                        <td class="align-middle">{{ $r->getDurationFormatted() }}</td>
-                        <td class="col-2 align-middle">
+                        <td class="align-middle">{{ $d->id }}</td>
+                        <td class="align-middle">{{ $d->route->getName() }}</td>
+                        <td class="align-middle">{{ \Carbon\Carbon::parse($d->time)->format('H:i') }}</td>
+                        <td class="align-middle">{{ $d->date ? $d->date : 'Every day' }}</td>
+                        <td class="align-middle text-bold text-{{ $d->active ? 'success' : 'danger' }}">{{ $d->active ? 'Active' : 'Inactive' }}</td>
+                        <td class="col-1 align-middle">
                             <div class="row justify-content-around">
-                                <a href="{{ route('admin.routes.edit', [$r->id, 'page' => request('page')]) }}"
+                                <a href="{{ route('admin.departures.edit', [$d->id, 'page' => request('page')]) }}"
                                    class="btn btn-sm pt-2 px-2 px-lg-3 btn-warning ">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <x-adminlte-modal id="delete-{{ $r->id }}" theme="danger" title="Are you sure?"
+                                <x-adminlte-modal id="delete-{{ $d->id }}" theme="danger" title="Are you sure?"
                                                   v-centered="true">
-                                    <p class="text-center my-3">Do you really want to delete route
-                                        - {{ $r->getName() }}</p>
+                                    <p class="text-center my-3">Do you really want to delete this departure</p>
+
                                     <x-slot name="footerSlot">
-                                        <form action="{{ route('admin.routes.destroy', $r->id) }}" method="POST">
+                                        <form action="{{ route('admin.departures.destroy', $d->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger mx-2">Delete</button>
@@ -61,7 +58,7 @@
                                     </x-slot>
                                 </x-adminlte-modal>
 
-                                <button data-toggle="modal" data-target="#delete-{{ $r->id }}"
+                                <button data-toggle="modal" data-target="#delete-{{ $d->id }}"
                                         class="btn btn-danger px-2 px-lg-3"><i class="fas fa-trash"></i></button>
                             </div>
                         </td>
@@ -74,12 +71,11 @@
                 </tbody>
             </table>
 
-            @if($routes->hasPages())
+            @if($departures->hasPages())
                 <div class="card-footer pt-4">
-                    {{ $routes->links() }}
+                    {{ $departures->links() }}
                 </div>
             @endif
         </div>
     </div>
-
 @endsection

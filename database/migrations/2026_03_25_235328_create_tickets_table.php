@@ -17,9 +17,11 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->smallInteger('seat_number');
             $table->decimal('price', 8, 2);
-            $table->foreignId('start_stop_id')->constrained('route_stops');
-            $table->foreignId('end_stop_id')->constrained('route_stops');
+            $table->date('date');
+            $table->string('start_city');
+            $table->string('end_city');
             $table->timestamps();
+            $table->index(['departure_id', 'date']);
         });
     }
 

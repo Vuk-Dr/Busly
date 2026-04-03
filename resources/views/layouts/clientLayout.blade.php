@@ -3,10 +3,10 @@
 <head>
     @include('common.client.head')
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 @include('common.client.navigation')
 
-<main>
+<main class="flex-grow-1 d-flex flex-column justify-content-center">
     @yield('content')
 </main>
 

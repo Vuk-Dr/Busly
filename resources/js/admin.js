@@ -65,6 +65,20 @@ $(document).ready(function() {
             updateOrderAndNames();
         }
     });
+    function checkDisableDate(){
+        if ($('#enableDateCheckbox').is(':checked')) {
+            $('#dateInput').prop('disabled', false);
+        } else {
+            $('#dateInput').prop('disabled', true);
+            $('#dateInput').val('');
+        }
+    }
+    //departures date
+    $('#enableDateCheckbox').on('change', function() {
+        checkDisableDate();
+    });
 
+    checkDisableDate();
     updateOrderAndNames();
+
 });

@@ -9,11 +9,13 @@
     --color-footer-bg: #0f172a;
     --color-footer-text: #cbd5e1;
 }
-
 body {
     background-color: var(--bs-body-bg);
     font-family: var(--bs-body-font-family);
     color: #191c21;
+}
+.container-mt{
+    padding-top: 85px;
 }
 
 h1, h2, h3, h4, h5, h6, .font-headline {
@@ -76,6 +78,15 @@ h1, h2, h3, h4, h5, h6, .font-headline {
     border: none;
 }
 
+.input-group > .select2-container--bootstrap-5 {
+    flex: 1 1 auto;
+    width: 1% !important;
+}
+
+.input-group > .select2-container--bootstrap-5 .select2-selection {
+    border: 1px solid #DEE2E6;
+}
+
 /* CSS Slider */
 .slider-wrapper {
     width: 100%;
@@ -125,17 +136,6 @@ h1, h2, h3, h4, h5, h6, .font-headline {
     margin-left: 0.5rem;
 }
 
-.timeline::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 8px; /* Početak linije */
-    bottom: 8px; /* Kraj linije */
-    width: 2px;
-    background-color: #0d6efd;
-    transform: translateX(-50%); /* Precizno centriranje same linije na 0 koordinatu */
-}
-
 .timeline-item {
     position: relative;
     margin-bottom: 1.5rem;
@@ -145,18 +145,29 @@ h1, h2, h3, h4, h5, h6, .font-headline {
     margin-bottom: 0;
 }
 
-/* Tačke na timeline-u */
+
 .timeline-item::after {
     content: '';
     position: absolute;
-    left: -1.5rem; /* Vraća tačku tačno na poziciju linije */
+    left: -1.5rem;
     top: 50%;
-    transform: translate(-50%, -50%); /* Precizno centriranje tačke po X i Y osi */
+    transform: translate(-50%, -50%);
     width: 14px;
     height: 14px;
     border-radius: 50%;
     background-color: #0d6efd;
     border: 2px solid #fff;
     z-index: 1;
+}
+
+.timeline-item:not(:first-child)::before {
+    content: '';
+    position: absolute;
+    left: -1.5rem;
+    top: -1.5rem;
+    bottom: 50%;
+    width: 2px;
+    background-color: #0d6efd;
+    transform: translateX(-50%);
 }
 

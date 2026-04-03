@@ -25,42 +25,35 @@
 
     <div class="container position-relative z-2 mt-n-custom">
         <div class="bg-white p-4 p-md-5 rounded-4 shadow-lg">
-            <form class="row g-4">
-                <div class="col-md-6 col-lg">
-                    <label class="form-label text-secondary fw-semibold small d-flex align-items-center gap-2 mb-2">
-                        <i data-lucide="map-pin" class="icon-sm"></i> DEPARTURE
-                    </label>
-                    <select class="w-100 form-select select-ajax-city" id="departureCity" name="departureCity" data-url="{{ route('cities.search') }}">
-                    </select>
+            <form action="{{ route('departures.index') }}" method="get" class="row g-3 align-items-end">
+                <div class="col-md-4">
+                    <label for="arrivalStation" class="form-label text-muted small">Departure Station</label>
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text bg-transparent"><i data-lucide="map-pin"></i></span>
+                        <select class="form-select select-ajax-city" name="departure" id="departureStation" data-url="{{ route('cities.search') }}">
+                            <option value=""></option>
+                        </select>
+                    </div>
                 </div>
-
-                <div class="col-md-6 col-lg">
-                    <label class="form-label text-secondary fw-semibold small d-flex align-items-center gap-2 mb-2">
-                        <i data-lucide="navigation" class="icon-sm"></i> ARRIVAL
-                    </label>
-                    <select class="w-100 form-select select-ajax-city" id="arrivalCity" name="arrivalCity" data-url="{{ route('cities.search') }}">
-                    </select>
+                <div class="col-md-4">
+                    <label for="arrivalStation" class="form-label text-muted small">Arrival Station</label>
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text bg-transparent"><i data-lucide="map-pin"></i></span>
+                        <select class="form-select select-ajax-city" name="arrival" id="arrivalStation" data-url="{{ route('cities.search') }}">
+                            <option value=""></option>
+                        </select>
+                    </div>
                 </div>
-
-                <div class="col-md-4 col-lg">
-                    <label class="form-label text-secondary fw-semibold small d-flex align-items-center gap-2 mb-2">
-                        <i data-lucide="calendar" class="icon-sm"></i> DATE
-                    </label>
-                    <input type="date" class="form-control bg-light border-0 fs-6">
+                <div class="col-md-3">
+                    <label for="departureDate" class="form-label text-muted small">Date</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-transparent"><i data-lucide="calendar"></i></span>
+                        <input type="date" name="date" class="form-control" id="departureDate">
+                    </div>
                 </div>
-
-                <div class="col-md-4 col-lg">
-                    <label class="form-label text-secondary fw-semibold small d-flex align-items-center gap-2 mb-2">
-                        <i data-lucide="users" class="icon-sm"></i> PASSENGERS
-                    </label>
-                    <input type="number" class="form-control bg-light border-0 fs-6" value="1" min="1"
-                           max="5"/>
-                </div>
-
-                <div class="col-md-4 col-lg d-flex align-items-end">
-                    <button type="submit"
-                            class="btn w-100 py-3 rounded-pill fw-bold text-white bg-hero-gradient border-0 shadow-sm transition-all hover-scale">
-                        Search Buses
+                <div class="col-md-1">
+                    <button type="submit" class="btn btn-primary w-100 d-flex justify-content-center align-items-center" style="height: 38px;">
+                        <i data-lucide="search"></i>
                     </button>
                 </div>
             </form>

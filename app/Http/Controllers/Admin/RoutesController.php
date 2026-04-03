@@ -115,25 +115,23 @@ class RoutesController extends Controller
             $route->price = $request->base_price;
             $route->save();
 
-           // $stops = $route->routeStops()->delete();
+            $route->routeStops()->delete();
 
-            $stops = $request->stops;
-            foreach ($stops as $s) {
+            $newStops = $request->stops;
+            foreach ($newStops as $s) {
                 /*
                 if(\Arr::has($s, 'id')){
                     $stop = RouteStop::find($s['id']);
-                }else{
-                    $stop = new RouteStop();
-                    $stop->route_id = $route->id;
-                }
+                }*/
+                $stop = new RouteStop();
+                $stop->route_id = $route->id;
                 $stop->city_id = $s['city'];
                 $stop->order = $s['order'];
                 if($stop->order > 1){
                     $stop->duration = $s['duration'];
                     $stop->price = $s['price'];
                 }
-                */
-                $s->save();
+                $stop->save();
             }
             DB::commit();
             return redirect()->route('admin.routes.index', ['page' => $request->page])

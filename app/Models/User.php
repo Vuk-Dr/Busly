@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Model
 {
-
+    public function role(){
+        return $this->belongsTo(Role::class);
+    }
 }

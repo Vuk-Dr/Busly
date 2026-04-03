@@ -15,8 +15,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        \DB::beginTransaction();
+        $this->call(RoleSeeder::class);
         $this->call(CitySeeder::class);
         $this->call(CarrierSeeder::class);
         $this->call(RoutesSeeder::class);
+        $this->call(DepartureSeeder::class);
+        \DB::commit();
     }
 }

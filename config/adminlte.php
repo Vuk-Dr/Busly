@@ -506,7 +506,7 @@ return [
             'fullscreen' => true,
         ],
         'options' => [
-            'loading_screen' => 1000,
+            'loading_screen' => 500,
             'auto_show_new_tab' => true,
             'use_navbar_items' => true,
         ],

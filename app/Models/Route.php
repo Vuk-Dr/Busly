@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Route extends Model
 {
-    public function name(){
+    public function getName(){
         return $this->firstStop()->city->name . ' - ' . $this->lastStop()->city->name;
     }
-    public function duration(){
-        return $this->routeStops()->sum('duration');
+    public function getDurationFormatted(){
+        $minutes = $this->routeStops()->sum('duration');
+        return sprintf('%02d:%02d', floor($minutes / 60), $minutes % 60);
     }
     public function totalPrice(){
         return $this->price + $this->routeStops()->sum('price');

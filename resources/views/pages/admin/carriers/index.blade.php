@@ -38,21 +38,29 @@
                         <td class="align-middle">{{ $c->name }}</td>
                         <td class="align-middle">{{ $c->email }}</td>
                         <td class="align-middle">{{ $c->phone }}</td>
-                        <td class="align-middle text-center"> @if($c->image) <img src="{{ asset('storage/uploads/carriers/' . $c->image) }}" alt="carrier-{{ $c->id }}" width="100" />
-                            @else/@endif</td>
+                        <td class="align-middle text-center"> @if($c->image)
+                                <img src="{{ asset('storage/uploads/carriers/' . $c->image) }}"
+                                     alt="carrier-{{ $c->id }}" width="100"/>
+                            @else
+                                /
+                            @endif</td>
                         <td class="align-middle">{{ $c->city->name }}</td>
                         <td class="col-1 align-middle">
                             <div class="row justify-content-around">
-                                <a href="{{ route('admin.carriers.edit', [$c->id, 'page' => request('page')]) }}" class="btn btn-sm pt-2 px-2 px-lg-3 btn-warning ">
+                                <a href="{{ route('admin.carriers.edit', [$c->id, 'page' => request('page')]) }}"
+                                   class="btn btn-sm pt-2 px-2 px-lg-3 btn-warning ">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <x-adminlte-modal id="delete-{{ $c->id }}" theme="danger" title="Are you sure?" v-centered="true">
-                                    <p class="text-center my-3">Do you really want to delete carrier - {{ $c->name }}</p>
+                                <x-adminlte-modal id="delete-{{ $c->id }}" theme="danger" title="Are you sure?"
+                                                  v-centered="true">
+                                    <p class="text-center my-3">Do you really want to delete carrier
+                                        - {{ $c->name }}</p>
 
                                     @if($c->routes()->count() > 0)
-                                        <ul class="alert alert-danger"><b>Warning: </b> Deleting carrier will also delete it's routes:
+                                        <ul class="alert alert-danger"><b>Warning: </b> Deleting carrier will also
+                                            delete it's routes:
                                             @foreach($c->routes as $r)
-                                                <li class="ml-4">{{ $r->name() }}</li>
+                                                <li class="ml-4">{{ $r->getName() }}</li>
                                             @endforeach
                                         </ul>
                                     @endif
@@ -66,7 +74,8 @@
                                     </x-slot>
                                 </x-adminlte-modal>
 
-                                <button data-toggle="modal" data-target="#delete-{{ $c->id }}" class="btn btn-danger px-2 px-lg-3"><i class="fas fa-trash"></i></button>
+                                <button data-toggle="modal" data-target="#delete-{{ $c->id }}"
+                                        class="btn btn-danger px-2 px-lg-3"><i class="fas fa-trash"></i></button>
                             </div>
                         </td>
                     </tr>

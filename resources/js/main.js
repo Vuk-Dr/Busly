@@ -10,6 +10,7 @@ $(document).ready(function() {
 
         $(this).select2({
             theme: 'bootstrap-5',
+
             placeholder: "Search for a station...",
             minimumInputLength: 3,
             ajax: {

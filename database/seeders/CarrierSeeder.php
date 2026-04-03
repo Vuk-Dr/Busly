@@ -17,7 +17,7 @@ class CarrierSeeder extends Seeder
         $faker = \Faker\Factory::create();
         $cities = City::all();
         foreach ($cities as $city) {
-            for ($i = 0; $i < rand(3,8); $i++) {
+            for ($i = 0; $i < rand(0,4); $i++) {
                 $carrier = new Carrier();
                 $carrier->name = $faker->company();
                 $carrier->email = $faker->email();

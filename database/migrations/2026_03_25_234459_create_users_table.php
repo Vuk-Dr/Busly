@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('activation_code')->nullable()->index();
             $table->string('password');
             $table->foreignId('role_id')->constrained();
             $table->foreignId('carrier_id')->nullable()->constrained();

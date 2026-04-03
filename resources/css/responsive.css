@@ -1,0 +1,32 @@
+@media (min-width: 425px) {
+    .newsletter-skew-bg {
+        display: block;
+        width: 100%;
+        transform: skewX(50deg) translateX(120%);
+    }
+}
+@media (min-width: 768px) {
+    .newsletter-skew-bg {
+        width: 50%;
+        transform: skewX(-20deg) translateX(32.5%);
+    }
+}
+
+@media (min-width: 992px) {
+    .newsletter-skew-bg {
+        width: 33%;
+        transform: skewX(-20deg) translateX(35%);
+    }
+}
+
+@media (min-width: 1200px) {
+    .newsletter-skew-bg {
+        transform: skewX(-20deg) translateX(37%);
+    }
+}
+
+@media (min-width: 1400px) {
+    .newsletter-skew-bg {
+        transform: skewX(-20deg) translateX(39%);
+    }
+}

@@ -1,0 +1,162 @@
+:root {
+    --bs-body-bg: #f9f9ff;
+    --bs-body-font-family: 'Inter', sans-serif;
+    --font-headline: 'Plus Jakarta Sans', sans-serif;
+    --primary-gradient: linear-gradient(135deg, #001f45 0%, #00428a 100%);
+    --color-secondary-fixed: #67fcc6;
+    --color-on-primary-container: #bbd0ff;
+    --color-secondary: #006c4f;
+    --color-footer-bg: #0f172a;
+    --color-footer-text: #cbd5e1;
+}
+
+body {
+    background-color: var(--bs-body-bg);
+    font-family: var(--bs-body-font-family);
+    color: #191c21;
+}
+
+h1, h2, h3, h4, h5, h6, .font-headline {
+    font-family: var(--font-headline);
+}
+
+/* Utility */
+.bg-hero-gradient { background: var(--primary-gradient); }
+.mt-n-custom { margin-top: -6rem; }
+.object-fit-cover { object-fit: cover; }
+.transition-all { transition: all 0.3s ease; }
+.hover-scale:hover { transform: scale(1.05); }
+.hover-shadow:hover { box-shadow: 0 1rem 3rem rgba(0,0,0,.175)!important; }
+
+/* Navbar */
+.glass-nav {
+    background: rgba(242, 243, 252, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom-left-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+}
+
+/* Hero Section */
+.hero-wrapper { min-height: 800px; padding-bottom: 10rem; }
+.hero-overlay { z-index: 1; opacity: 0.85; }
+
+.feature-icon-wrapper { width: 80px; height: 80px; background-color: #e7e8f0; }
+
+.bg-popular-routes { background-color: #f2f3fc; }
+.route-img-wrapper { height: 200px; }
+.badge-trending { background-color: var(--color-secondary); }
+
+.operators-underline { width: 80px; height: 6px; background-color: var(--color-secondary); }
+
+.newsletter-skew-bg {
+    display: none;
+}
+
+.newsletter-input{
+    font-size: 0.8rem;
+}
+.newsletter-input::placeholder {
+    font-size: 0.9rem;
+    color: #eee !important;
+    opacity: 0.7;
+}
+
+.footer-custom { background-color: var(--color-footer-bg); color: var(--color-footer-text); }
+.social-btn { width: 40px; height: 40px; }
+
+/* Icon sizes */
+.icon-sm { width: 18px; height: 18px; }
+.icon-md { width: 24px; height: 24px; }
+.icon-lg { width: 36px; height: 36px; }
+
+/* Select2 */
+.select2-container--bootstrap-5 .select2-selection {
+    background-color: #f8f9fa; /* Bootstrap light siva */
+    font-weight: 500;
+    border: none;
+}
+
+/* CSS Slider */
+.slider-wrapper {
+    width: 100%;
+    overflow: hidden;
+    padding: 1rem 0;
+}
+
+#logo-slider {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    animation: scrollLogos 20s linear infinite;
+}
+
+#logo-slider:hover {
+    animation-play-state: paused;
+}
+
+.operator-logo {
+    height: 50px;
+    margin-right: 5rem;
+    opacity: 0.5;
+    filter: grayscale(100%);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.operator-logo:hover {
+    opacity: 1;
+    filter: grayscale(0%);
+}
+
+@keyframes scrollLogos {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Departures */
+.ticket-card:hover {
+    background-color: #ececf0;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.timeline {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-left: 0.5rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px; /* Početak linije */
+    bottom: 8px; /* Kraj linije */
+    width: 2px;
+    background-color: #0d6efd;
+    transform: translateX(-50%); /* Precizno centriranje same linije na 0 koordinatu */
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Tačke na timeline-u */
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    left: -1.5rem; /* Vraća tačku tačno na poziciju linije */
+    top: 50%;
+    transform: translate(-50%, -50%); /* Precizno centriranje tačke po X i Y osi */
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: #0d6efd;
+    border: 2px solid #fff;
+    z-index: 1;
+}
+

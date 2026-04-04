@@ -31,4 +31,25 @@ $(document).ready(function() {
         })
     });
 
+    $('#newsletterButton').click(function (){
+       let email = $('#newsletterEmail').val();
+       $.ajax({
+           url : '/newsletter/subscribe',
+           type : 'POST',
+           data : {
+               email : email
+           },
+           headers : {
+               'X-CSRF-TOKEN' : $('input[name="_token"]').val()
+           },
+           success : function(response){
+               toastr.success(response.message);
+           },
+           error : function (xhr){
+               let errorMessage = xhr.responseJSON.message;
+               toastr.error('Error: ' + errorMessage);
+           }
+        });
+    });
+
 });

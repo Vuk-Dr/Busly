@@ -32,6 +32,8 @@ class RegisterRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'first_name.regex' => 'Must start with uppercase letter, between 2 and 15 characters',
+            'last_name.regex' => 'Must start with uppercase letter, between 2 and 15 characters',
             'password.regex' => 'Password must be at least 8 characters long and include uppercase and lowercase letters, a number, and a special character'
         ];
     }

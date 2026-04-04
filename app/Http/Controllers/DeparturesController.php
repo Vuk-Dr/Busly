@@ -2,17 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SearchDeparturesRequest;
 use App\Models\City;
 use App\Models\Departure;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class DeparturesController extends Controller
 {
-    //
-    public function index(Request $request)
+    public function index(){
+        $searchDate = date("Y-m-d");
+        return view('pages.client.departures', compact('searchDate'));
+    }
+    public function search(Request $request)
     {
         try{
+            $validator = Validator::make($request->all(), [
+                'departure' => 'required|exists:cities,id',
+                'arrival' => 'required|exists:cities,id',
+                'date' => 'required|date_format:Y-m-d|after_or_equal:today',
+            ]);
+
+            if ($validator->fails()) {
+                $redirect = redirect()->route('departures.index')
+                    ->withErrors($validator)
+                    ->withInput();
+
+                if (!$validator->errors()->has('departure') && $request->filled('departure')) {
+                    $departureCity = City::find($request->departure);
+                    if ($departureCity) {
+                        $redirect->with('old_departure', $departureCity->name);
+                    }
+                }
+                if (!$validator->errors()->has('arrival') && $request->filled('arrival')) {
+                    $arrivalCity = City::find($request->arrival);
+                    if ($arrivalCity) {
+                        $redirect->with('old_arrival', $arrivalCity->name);
+                    }
+                }
+                return $redirect;
+            }
             $departureCityId = $request->departure;
             $arrivalCityId = $request->arrival;
             $searchDate = $request->date;
@@ -42,7 +72,7 @@ class DeparturesController extends Controller
             ])->paginate(10);
 
             $departures->map(function ($departure) use ($departureCityId, $arrivalCityId) {
-                $segmentPrice = 0;
+                $segmentPrice = $departure->route->price;
                 $minutesToDeparture = 0;
                 $segmentDurationMinutes = 0;
                 $calculatePrice = false;
@@ -118,7 +148,7 @@ class DeparturesController extends Controller
             $departureCity = City::find($departureCityId);
             $arrivalCity = City::find($arrivalCityId);
 
-            return view('pages.departures', compact('departures', 'departureCity', 'arrivalCity', 'searchDate'));
+            return view('pages.client.departures', compact('departures', 'departureCity', 'arrivalCity', 'searchDate'));
         }catch(\Exception $e){
             \Log::error($e->getMessage());
             return redirect()->route('home.index')->with('error', 'Something went wrong');

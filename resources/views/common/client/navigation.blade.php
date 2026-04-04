@@ -6,6 +6,9 @@
             <span class="text-secondary fw-medium d-none d-sm-inline">
                 Hi, {{ session('user')->first_name }}
             </span>
+            @if(session('user')->role->name == 'admin')
+            <a class="btn btn-outline-primary rounded-pill fw-bold px-3 px-md-4 transition-all" href="{{ route('admin.index') }}">Admin</a>
+            @endif
             <a class="btn btn-primary rounded-pill fw-bold px-3 px-md-4 transition-all" href="{{ route('login.logout') }}">Logout</a>
         @else
             <a class="btn btn-outline-primary rounded-pill fw-bold px-3 px-md-4 transition-all" href="{{ route('login.login') }}">Login</a>
@@ -21,7 +24,7 @@
             <x-nav-link route="departures.index" page="Departures"/>
             <li class="nav-item"><a class="nav-link text-secondary fw-medium link-primary" href="#">Routes</a></li>
             <li class="nav-item"><a class="nav-link text-secondary fw-medium link-primary" href="#">Bus Operators</a></li>
-            <li class="nav-item"><a class="nav-link text-secondary fw-medium link-primary" href="#">Author</a></li>
+            <x-nav-link route="author.index" page="Author"/>
             @if(session()->has('user'))
             <li class="nav-item"><a class="nav-link text-secondary fw-medium link-primary" href="#">My Bookings</a></li>
             @endif

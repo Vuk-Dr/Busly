@@ -55,7 +55,7 @@
             Thank you for signing up. Please activate your account by clicking the button below:
         </p>
 
-        <a href="{{ route('register.activate', ['code' => $user->activation_code]) }}" class="btn">
+        <a href="{{ route('register.activate', ['token' => $user->activation_code]) }}" class="btn">
             Activate Account
         </a>
 

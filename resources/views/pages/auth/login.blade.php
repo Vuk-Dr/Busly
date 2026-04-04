@@ -7,10 +7,10 @@
             <div class="col-md-5 col-lg-4">
 
                 <div class="card shadow-sm">
-                    @if(session('success'))
-                        <div class="alert alert-success mb-3">{{ session('success') }}</div>
-                    @endif
                     <div class="card-body p-4">
+                        @if(session('success'))
+                            <div class="alert alert-success mb-3">{{ session('success') }}</div>
+                        @endif
                         <h4 class="card-title mb-4">Login</h4>
 
                         <form method="POST" action="{{ route("login.login") }}">

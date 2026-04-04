@@ -21,7 +21,7 @@ class CitySeeder extends Seeder
                 $city->name = $faker->city();
 
                 $filename = \Str::random(40) . '.png';
-                \Storage::disk('public')->put('uploads/cities/'.$filename, \File::get('public/assets/test-image.png'));
+                \Storage::disk('public')->put('uploads/cities/'.$filename, \File::get('public/assets/test-image2.png'));
 
                 $city->image = $filename;
                 $city->save();

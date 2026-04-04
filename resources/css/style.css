@@ -24,7 +24,7 @@ h1, h2, h3, h4, h5, h6, .font-headline {
 
 /* Utility */
 .bg-hero-gradient { background: var(--primary-gradient); }
-.mt-n-custom { margin-top: -6rem; }
+.mt-n-custom { margin-top: -17.5rem; }
 .object-fit-cover { object-fit: cover; }
 .transition-all { transition: all 0.3s ease; }
 .hover-scale:hover { transform: scale(1.05); }

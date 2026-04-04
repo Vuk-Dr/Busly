@@ -3,13 +3,13 @@
 @section('content')
 
     <div class="position-relative d-flex align-items-center overflow-hidden hero-wrapper">
-        <div class="position-absolute w-100 h-100 top-0 start-0 z-0">
+        <div class="position-absolute w-100 h-75 top-0 start-0 z-0">
             <div class="position-absolute w-100 h-100 top-0 start-0 bg-hero-gradient hero-overlay"></div>
-            <img src="https://images.unsplash.com/photo-1570125909232-eb263c188f7e?q=80&w=2071&auto=format&fit=crop"
+            <img src="{{ asset('assets/img/hero.png') }}"
                  class="w-100 h-100 object-fit-cover" alt="Hero background with centered bus">
         </div>
 
-        <div class="container position-relative z-1 pt-5 mt-5">
+        <div class="container position-relative z-1 mt-5">
             <div class="row">
                 <div class="col-lg-8">
                     <h1 class="font-headline display-3 fw-bolder text-white mb-4 lh-sm">
@@ -25,7 +25,7 @@
 
     <div class="container position-relative z-2 mt-n-custom">
         <div class="bg-white p-4 p-md-5 rounded-4 shadow-lg">
-            <form action="{{ route('departures.index') }}" method="get" class="row g-3 align-items-end">
+            <form action="{{ route('departures.search') }}" method="get" class="row g-3 align-items-start">
                 <div class="col-md-4">
                     <label for="arrivalStation" class="form-label text-muted small">Departure Station</label>
                     <div class="input-group flex-nowrap">
@@ -48,11 +48,12 @@
                     <label for="departureDate" class="form-label text-muted small">Date</label>
                     <div class="input-group">
                         <span class="input-group-text bg-transparent"><i data-lucide="calendar"></i></span>
-                        <input type="date" name="date" class="form-control" id="departureDate">
+                        <input type="date" name="date" value="{{ $todayDate }}" class="form-control" id="departureDate">
                     </div>
                 </div>
-                <div class="col-md-1">
-                    <button type="submit" class="btn btn-primary w-100 d-flex justify-content-center align-items-center" style="height: 38px;">
+                <div class="col-md-1 align-items-end">
+                    <span>&nbsp;</span>
+                    <button type="submit" class="btn btn-primary w-100 d-flex justify-content-center align-items-center mt-1" style="height: 38px;">
                         <i data-lucide="search"></i>
                     </button>
                 </div>
@@ -106,57 +107,9 @@
             </div>
 
             <div class="row g-4">
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 border-0 rounded-4 overflow-hidden shadow-sm hover-shadow transition-all">
-                        <div class="position-relative overflow-hidden route-img-wrapper">
-                            <img src="https://images.unsplash.com/photo-1513635269975-5969336ac1fc?q=80&w=2070&auto=format&fit=crop"
-                                 class="w-100 h-100 object-fit-cover transition-all" alt="London">
-                            <span class="badge position-absolute top-0 end-0 m-3 rounded-pill px-3 py-2 text-white badge-trending">Trending</span>
-                        </div>
-                        <div class="card-body p-4 d-flex flex-column">
-                            <h4 class="font-headline fs-5 fw-bold mb-1">London → Manchester</h4>
-                            <p class="text-secondary mb-4 small">Approx. 4h 30m • Daily departures</p>
-                            <div class="d-flex justify-content-between align-items-center mt-auto">
-                                <span class="text-secondary small">Starting from</span>
-                                <span class="fs-4 fw-bolder text-primary">£12.00</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 border-0 rounded-4 overflow-hidden shadow-sm hover-shadow transition-all">
-                        <div class="position-relative overflow-hidden route-img-wrapper">
-                            <img src="https://images.unsplash.com/photo-1520623695276-8dc87cb7356c?q=80&w=2070&auto=format&fit=crop"
-                                 class="w-100 h-100 object-fit-cover transition-all" alt="Edinburgh">
-                        </div>
-                        <div class="card-body p-4 d-flex flex-column">
-                            <h4 class="font-headline fs-5 fw-bold mb-1">London → Edinburgh</h4>
-                            <p class="text-secondary mb-4 small">Approx. 8h 15m • Overnight sleeper</p>
-                            <div class="d-flex justify-content-between align-items-center mt-auto">
-                                <span class="text-secondary small">Starting from</span>
-                                <span class="fs-4 fw-bolder text-primary">£24.50</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 border-0 rounded-4 overflow-hidden shadow-sm hover-shadow transition-all">
-                        <div class="position-relative overflow-hidden route-img-wrapper">
-                            <img src="https://images.unsplash.com/photo-1505881402582-c5bc11054f91?q=80&w=2105&auto=format&fit=crop"
-                                 class="w-100 h-100 object-fit-cover transition-all" alt="Brighton">
-                        </div>
-                        <div class="card-body p-4 d-flex flex-column">
-                            <h4 class="font-headline fs-5 fw-bold mb-1">London → Brighton</h4>
-                            <p class="text-secondary mb-4 small">Approx. 2h 00m • Frequent service</p>
-                            <div class="d-flex justify-content-between align-items-center mt-auto">
-                                <span class="text-secondary small">Starting from</span>
-                                <span class="fs-4 fw-bolder text-primary">£8.00</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @foreach($routes as $r)
+                    <x-popular-route :route="$r"></x-popular-route>
+                @endforeach
             </div>
         </div>
     </div>
@@ -169,25 +122,9 @@
 
         <div class="container px-0 slider-wrapper">
             <div id="logo-slider">
-                <img src="https://placehold.co/180x50/f9f9ff/727784?text=National+Express" class="operator-logo"
-                     alt="National Express"> <!--uradi link ka prevozniku -->
-                <img src="https://placehold.co/150x50/f9f9ff/727784?text=Megabus" class="operator-logo" alt="Megabus">
-                <img src="https://placehold.co/150x50/f9f9ff/727784?text=FlixBus" class="operator-logo" alt="FlixBus">
-                <img src="https://placehold.co/160x50/f9f9ff/727784?text=Greyhound" class="operator-logo"
-                     alt="Greyhound">
-                <img src="https://placehold.co/170x50/f9f9ff/727784?text=Stagecoach" class="operator-logo"
-                     alt="Stagecoach">
-                <img src="https://placehold.co/180x50/f9f9ff/727784?text=Arriva" class="operator-logo" alt="Arriva">
-
-                <img src="https://placehold.co/180x50/f9f9ff/727784?text=National+Express" class="operator-logo"
-                     alt="National Express">
-                <img src="https://placehold.co/150x50/f9f9ff/727784?text=Megabus" class="operator-logo" alt="Megabus">
-                <img src="https://placehold.co/150x50/f9f9ff/727784?text=FlixBus" class="operator-logo" alt="FlixBus">
-                <img src="https://placehold.co/160x50/f9f9ff/727784?text=Greyhound" class="operator-logo"
-                     alt="Greyhound">
-                <img src="https://placehold.co/170x50/f9f9ff/727784?text=Stagecoach" class="operator-logo"
-                     alt="Stagecoach">
-                <img src="https://placehold.co/180x50/f9f9ff/727784?text=Arriva" class="operator-logo" alt="Arriva">
+                @foreach($carriers as $c)
+                    <img src="{{ asset('storage/uploads/carriers/' . $c->image) }}" class="operator-logo" alt="{{ $c->name }}">
+                @endforeach
             </div>
         </div>
     </div>
@@ -205,10 +142,13 @@
                     </div>
                     <div class="col-lg-6">
                         <form class="d-flex flex-column flex-md-row gap-3">
+                            @csrf
                             <input type="email"
+                                   id="newsletterEmail"
                                    class="newsletter-input form-control bg-light bg-opacity-10 border-light border-opacity-25 text-white px-3 py-2 rounded-pill"
                                    placeholder="Your email address">
-                            <button type="submit"
+                            <button type="button"
+                                    id="newsletterButton"
                                     class="btn btn-success rounded-pill fw-bold px-1 text-white col-md-4 text-nowrap transition-all">
                                 Subscribe Now
                             </button>

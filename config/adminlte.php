@@ -350,6 +350,12 @@ return [
             'active' => ['admin/users*'],
         ],
         [
+            'text' => 'Back to site',
+            'url' => '/',
+            'icon' => 'fas fa-arrow-left',
+            'topnav_right' => 'true'
+        ],
+        [
             'text' => 'Logout',
             'url' => 'logout',
             'icon' => 'fas fa-arrow-alt-circle-right',

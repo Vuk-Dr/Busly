@@ -15,7 +15,7 @@ class LoginController extends Controller
         $email = $request->email;
         $password = md5($request->password);
 
-        $user = User::where('email', $email)->first();
+        $user = User::with('role')->where('email', $email)->first();
         if(!$user || $user->password != $password){
             return redirect()->back()->with('error', 'Invalid credentials');
         }
@@ -31,6 +31,6 @@ class LoginController extends Controller
 
     public function logout() {
         session()->remove("user");
-        return redirect()->route("home.index");
+        return redirect()->route("login.index");
     }
 }

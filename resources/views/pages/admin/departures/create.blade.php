@@ -22,7 +22,7 @@
                         <option value=""/>
                         @foreach($routes as $r)
                             <option value="{{ $r->id }}" {{ old('route_id') == $r->id ? 'selected' : '' }}>
-                                {{ $r->getName() }}
+                                {{ $r->carrier->name.' : '. $r->getName() }}
                             </option>
                         @endforeach
                     </x-adminlte-select2>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="col-4 col-md-2 mt-4 d-flex justify-content-center align-items-center">
                     <label class="mt-1 mr-2">Active: </label>
-                    <input type="checkbox" name="active" {{ old('active') ? 'checked' : ''}}>
+                    <input type="checkbox" name="active" {{ old('active') ?? 'checked'}}>
                 </div>
                 <div class="col-8 col-md-4">
                     <label for="time">Time:</label>

@@ -11,7 +11,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $carriers = Carrier::all();
+        $carriers = Carrier::withCount('routes')
+            ->orderBy('routes_count', 'desc')
+            ->limit(10)->get();
         $routes = Route::withCount('departures')
             ->with('routeStops')
             ->orderBy('departures_count', 'desc')

@@ -18,7 +18,7 @@ class CarriersController extends Controller
      */
     public function index()
     {
-        $carriers = Carrier::with('city')->paginate(20);
+        $carriers = Carrier::with('city')->paginate(10);
 
         return view('pages.admin.carriers.index', compact('carriers'));
     }

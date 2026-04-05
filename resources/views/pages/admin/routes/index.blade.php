@@ -68,7 +68,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="text-center bg-warning">No carriers found.</td>
+                        <td colspan="8" class="text-center bg-warning">No carriers found.</td>
                     </tr>
                 @endforelse
                 </tbody>

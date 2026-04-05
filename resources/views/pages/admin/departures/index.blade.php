@@ -23,6 +23,7 @@
                 <thead>
                 <tr>
                     <th>#</th>
+                    <th>Carrier</th>
                     <th>Route</th>
                     <th>Time</th>
                     <th>Date</th>
@@ -34,6 +35,7 @@
                 @forelse($departures as $d)
                     <tr>
                         <td class="align-middle">{{ $d->id }}</td>
+                        <td class="align-middle">{{ $d->route->carrier->name }}</td>
                         <td class="align-middle">{{ $d->route->getName() }}</td>
                         <td class="align-middle">{{ \Carbon\Carbon::parse($d->time)->format('H:i') }}</td>
                         <td class="align-middle">{{ $d->date ? $d->date : 'Every day' }}</td>
@@ -65,7 +67,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="text-center bg-warning">No carriers found.</td>
+                        <td colspan="7" class="text-center bg-warning">No carriers found.</td>
                     </tr>
                 @endforelse
                 </tbody>

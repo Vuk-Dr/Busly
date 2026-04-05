@@ -15,7 +15,9 @@ class DeparturesController extends Controller
      */
     public function index()
     {
-        $departures = Departure::with('route')->paginate(15);
+        $departures = Departure::with(['route','route.carrier'])
+            ->orderBy('time', 'asc')
+            ->paginate(10);
 
         return view('pages.admin.departures.index', compact('departures'));
     }
@@ -25,7 +27,7 @@ class DeparturesController extends Controller
      */
     public function create()
     {
-        $routes = Route::all();
+        $routes = Route::with('carrier')->get();
         return view('pages.admin.departures.create', compact('routes'));
     }
 

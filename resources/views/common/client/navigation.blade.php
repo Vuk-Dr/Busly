@@ -12,6 +12,7 @@
             <a class="btn btn-primary rounded-pill fw-bold px-3 px-md-4 transition-all" href="{{ route('login.logout') }}">Logout</a>
         @else
             <a class="btn btn-outline-primary rounded-pill fw-bold px-3 px-md-4 transition-all" href="{{ route('login.login') }}">Login</a>
+            <a class="btn btn-primary rounded-pill fw-bold px-3 px-md-4 transition-all" href="{{ route('register.index') }}">Register</a>
         @endif
 
         <button class="navbar-toggler border-0 px-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">

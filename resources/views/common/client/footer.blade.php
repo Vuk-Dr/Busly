@@ -40,12 +40,11 @@
             <div class="col-md-6 col-lg-2">
                 <h5 class="fw-bold text-white mb-4">Legal</h5>
                 <ul class="list-unstyled d-flex flex-column gap-3">
-                    <li><a href="#" class="text-decoration-none text-reset transition-all">Terms</a></li>
-                    <li><a href="#" class="text-decoration-none text-reset transition-all">Privacy</a></li>
-                    <li><a href="#" class="text-decoration-none text-reset transition-all">Cookie Policy</a></li>
-                    <li><a href="#" class="text-decoration-none text-reset transition-all">Sitemap</a></li>
+                    <li><a href="{{ asset('documentation.pdf') }}" class="text-decoration-none text-reset transition-all">DOCUMENTATION</a></li>
+
                 </ul>
             </div>
+
         </div>
 
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center pt-4 border-top border-secondary border-opacity-25">

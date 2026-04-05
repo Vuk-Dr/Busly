@@ -47,6 +47,9 @@ class DeparturesController extends Controller
             $arrivalCityId = $request->arrival;
             $searchDate = $request->date;
 
+            $isToday = Carbon::parse($searchDate)->isToday();
+            $currentTime = Carbon::now()->format('H:i:s');
+
             $departures = Departure::whereHas('route', function ($routeQuery) use ($departureCityId, $arrivalCityId) {
                 $routeQuery->whereHas('routeStops', function ($arrivalStopQuery) use ($departureCityId, $arrivalCityId) {
                     $arrivalStopQuery->where('city_id', $arrivalCityId)
@@ -63,7 +66,10 @@ class DeparturesController extends Controller
                         $q->where('one_time', 1)
                             ->whereDate('date', $searchDate);
                     });
-            })->where('active', 1)->with([
+            })->where('active', 1)
+                ->when($isToday, function ($query) use ($currentTime) {
+                    $query->whereTime('time', '>', $currentTime);
+                })->with([
                 'route.carrier',
                 'route.routeStops' => function ($query) {
                     $query->orderBy('order', 'asc');

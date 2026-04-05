@@ -20,7 +20,7 @@ class RoutesController extends Controller
      */
     public function index()
     {
-        $routes = Route::with('carrier')->paginate(20);
+        $routes = Route::with('carrier')->paginate(10);
 
         return view('pages.admin.routes.index', compact('routes'));
     }
